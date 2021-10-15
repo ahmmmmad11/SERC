@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Subject;
+use App\Models\LevelSubject;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -25,10 +25,15 @@ class CreateResultsRequest extends FormRequest
      */
     public function rules()
     {
-        $max_mark = Subject::find($this->request->subject_id)->full_degree;
+        $max_mark = LevelSubject::where('subject_id', $this->request->subject_id)
+            ->where('level_id', $this->request->level_id)
+            ->first()
+            ->full_degree;
+
         return [
             'teacher_id' => ['required', 'exists:teachers,id'],
             'subject_id' => ['required', 'exists:subjects,id'],
+            'level_id' => ['required', 'exists:levels,id'],
             'academic_year' => ['required'],
             'term' => ['required', Rule::in(['first', 'last'])],
             'results' => ['required', 'array'],

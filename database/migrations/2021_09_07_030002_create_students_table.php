@@ -22,6 +22,7 @@ class CreateStudentsTable extends Migration
             $table->date('started_at');
             $table->foreignId('school_id');
             $table->foreignId('level_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

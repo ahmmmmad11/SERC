@@ -17,6 +17,7 @@ class CreateAdministrativeUnitsTable extends Migration
             $table->id();
             $table->foreignId('local_id');
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

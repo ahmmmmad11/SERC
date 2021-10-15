@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateResultsRequest;
+use App\Models\Result;
 use Illuminate\Http\Request;
 
 class ResultsController extends Controller
@@ -20,12 +21,23 @@ class ResultsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  CreateResultsRequest  $request
+     * @return mixed
      */
-    public function store(Request $request)
+    public function store(CreateResultsRequest $request)
     {
-        //
+        foreach ($request->results as  $result) {
+            Result::create([
+                'teacher_id'    => $request->teacher_id,
+                'subject_id'    => $request->subject_id,
+                'level_id'      => $request->level_id,
+                'academic_year' => $request->academic_year,
+                'term'          => $request->term,
+                'mark'          => $result['mark'],
+                'student_id'    => $result['student_id'],
+            ]);
+        }
+        return true;
     }
 
     /**

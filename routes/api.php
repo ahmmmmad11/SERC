@@ -1,7 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SchoolsController;
+use App\Http\Controllers\TeachersController;
+use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\LevelsController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ResultsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::apiResource('schools', SchoolsController::class);
+Route::apiResource('subjects', SubjectController::class);
+Route::apiResource('teachers', TeachersController::class);
+Route::apiResource('students', StudentsController::class);
+Route::apiResource('levels', LevelsController::class);
+Route::apiResource('results', ResultsController::class)->except(['show', 'delete']);

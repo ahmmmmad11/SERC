@@ -25,8 +25,8 @@ class updateOrCreateSchoolRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'                        => ['nullable', 'exists:school'],
-            'administrative_unit_id'    => ['required', 'exists:administrative_units'],
+            'id'                        => ['nullable', 'exists:schools,id'],
+            'administrative_unit_id'    => ['required', 'exists:administrative_units,id'],
             'name'                      => ['required', 'string'],
             'type'                      => ['required', Rule::in(['public', 'private'])],
             'gender'                    => ['required', Rule::in(['males', 'females', 'mixed'])],

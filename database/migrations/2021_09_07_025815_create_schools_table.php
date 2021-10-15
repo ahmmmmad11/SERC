@@ -24,6 +24,7 @@ class CreateSchoolsTable extends Migration
             $table->string('api_key')->nullable();
             $table->string('api_secret')->nullable();
             $table->boolean('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
