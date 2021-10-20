@@ -18,7 +18,6 @@ class CreateSubjectsTable extends Migration
             $table->string('name');
             $table->set('grade', ['basic', 'middle', 'secondary']);
             $table->softDeletes();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class School extends Model
         'type',
         'gender',
         'level',
+        'grade',
         'established_at',
         'api_key',
         'api_secret'
