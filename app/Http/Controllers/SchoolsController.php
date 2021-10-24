@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Collections\SchoolsCollection;
 use App\Http\Requests\updateOrCreateSchoolRequest;
 use App\Http\Resources\SchoolRsource;
 use App\Models\School;
+use Illuminate\Http\Request;
 
 class SchoolsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return SchoolRsource::collection(SchoolsCollection::collection($request));
     }
 
 

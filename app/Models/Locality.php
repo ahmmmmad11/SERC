@@ -20,7 +20,7 @@ class Locality extends Model
     }
 
     public function administrativeUnits () {
-        return $this->hasMany(AdminstrativeUnit::class);
+        return $this->hasMany(AdministrativeUnit::class);
     }
 
 }

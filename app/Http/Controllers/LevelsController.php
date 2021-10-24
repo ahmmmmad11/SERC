@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Collections\LevelsCollection;
 use App\Http\Requests\UpdateOrCreateLevelRequest;
+use App\Http\Resources\LevelResource;
 use App\Models\Level;
 
 class LevelsController extends Controller
@@ -10,11 +12,11 @@ class LevelsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function index()
     {
-
+        return LevelResource::collection(LevelsCollection::collection());
     }
 
 

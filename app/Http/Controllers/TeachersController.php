@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Collections\TeachersCollection;
 use App\Http\Requests\updateOrCreateTeacherRequest;
+use App\Http\Resources\TeacherResource;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
@@ -11,11 +13,11 @@ class TeachersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return TeacherResource::collection(TeachersCollection::collection($request));
     }
 
     /**
