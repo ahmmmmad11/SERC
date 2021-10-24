@@ -7,6 +7,7 @@ use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\LevelsController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ResultsController;
+use App\Http\Controllers\ExchangesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,10 @@ use App\Http\Controllers\ResultsController;
 |
 */
 
-Route::apiResource('schools', SchoolsController::class);
-Route::apiResource('subjects', SubjectController::class);
-Route::apiResource('teachers', TeachersController::class);
-Route::apiResource('students', StudentsController::class);
-Route::apiResource('levels', LevelsController::class);
+Route::apiResource('schools', SchoolsController::class)->except('show');
+Route::apiResource('subjects', SubjectController::class)->except('show');
+Route::apiResource('teachers', TeachersController::class)->except('show');
+Route::apiResource('students', StudentsController::class)->except('show');
+Route::apiResource('levels', LevelsController::class)->except('show');
 Route::apiResource('results', ResultsController::class)->except(['show', 'delete']);
+Route::apiResource('exchanges', ExchangesController::class)->except('show');

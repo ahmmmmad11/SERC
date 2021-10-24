@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class updateOrCreateStudentRequest extends FormRequest
+class ExchangeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class updateOrCreateStudentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class updateOrCreateStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'student_id' => ['required', 'exists:students,id'] ,
+            'new_school_id' => ['required', 'exists:schools,id'],
+            'reason' => ['required', 'string'],
         ];
     }
 }

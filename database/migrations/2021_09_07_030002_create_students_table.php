@@ -20,6 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('address')->nullable();
             $table->set('grade', ['basic', 'middle', 'secondary']);
             $table->date('started_at');
+            $table->enum('gender', ['male', 'female']);
             $table->foreignId('school_id');
             $table->foreignId('level_id');
             $table->softDeletes();
