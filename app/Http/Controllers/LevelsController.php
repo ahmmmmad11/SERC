@@ -25,7 +25,7 @@ class LevelsController extends Controller {
      */
     public function index(Request $request) {
         //TODO
-        return Level::with('subjects.subject')->where('grade', 'basic')->get();
+        return Level::with('subjects.subject')->where('grade', $request->school->grade)->get();
         // return LevelResource::collection(LevelsCollection::collection());
     }
 
