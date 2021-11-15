@@ -5,26 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
-class StudentsController extends Controller
-{
-    public function __construct()
-{
-    // Middleware only applied to these methods
-    $this->middleware('school-api', [
-        'only' => [
-            'index' // Could add bunch of more methods too
-        ]
-    ]);
-}
+class StudentsController extends Controller {
+    public function __construct() {
+        // Middleware only applied to these methods
+        $this->middleware('school-api', [
+            'only' => [
+                'index' // Could add bunch of more methods too
+            ]
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
 
-        return Student::where('school_id',$request->school->id)->get();
+        return Student::where('school_id', $request->school->id)->get();
     }
 
     /**
@@ -33,8 +30,7 @@ class StudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
     }
 
@@ -45,8 +41,7 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -56,8 +51,7 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 }

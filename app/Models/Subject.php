@@ -18,4 +18,8 @@ class Subject extends Model
     public function results () {
         return $this->hasMany(Result::class);
     }
+
+    public function level () {
+        return $this->hasMany(LevelSubject::class);
+    }
 }

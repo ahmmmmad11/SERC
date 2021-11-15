@@ -29,6 +29,10 @@ class TeachersController extends Controller
         return Teacher::updateOrCreate(['id' => $request->id], $request->all());
     }
 
+    public function show(Teacher $teacher){
+        return $teacher;
+    }
+
     /**
      * Remove the specified resource from storage.
      *

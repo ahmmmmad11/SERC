@@ -18,6 +18,7 @@ class CreateLevelSubjectsTable extends Migration
             $table->foreignId('level_id');
             $table->foreignId('subject_id');
             $table->integer('full_degree');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
