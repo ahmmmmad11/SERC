@@ -13,7 +13,7 @@ class LevelsController extends Controller {
         // Middleware only applied to these methods
         $this->middleware('school-api', [
             'only' => [
-                // 'index' // Could add bunch of more methods too
+                'index' // Could add bunch of more methods too
             ]
         ]);
     }
