@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Collections\SchoolsCollection;
 use App\Http\Requests\updateOrCreateSchoolRequest;
 use App\Http\Resources\SchoolRsource;
 use App\Models\School;
+use Illuminate\Http\Request;
 
-class SchoolsController extends Controller
-{
+class SchoolsController extends Controller {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function index()
-    {
-        return School::all();
+    public function index(Request $request) {
+        return SchoolRsource::collection(SchoolsCollection::collection($request));
     }
 
 
@@ -26,8 +26,7 @@ class SchoolsController extends Controller
      * @return SchoolRsource
      * @noinspection PhpUndefinedMethodInspection
      */
-    public function store(updateOrCreateSchoolRequest $request)
-    {
+    public function store(updateOrCreateSchoolRequest $request) {
         $school = School::updateOrCreate(['id' => $request->id], $request->validated());
         return new SchoolRsource($school);
     }
@@ -38,8 +37,7 @@ class SchoolsController extends Controller
      * @param    School $school
      * @return \Illuminate\Http\Response
      */
-    public function destroy(School $school)
-    {
+    public function destroy(School $school) {
         $school->delete();
         return response(['message' => __('school has been deleted successfully')]);
     }

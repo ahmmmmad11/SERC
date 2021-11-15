@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\updateOrCreateSubjectRequest;
+use App\Http\Resources\SubjectResource;
 use App\Models\Subject;
 
 class SubjectController extends Controller
@@ -14,7 +15,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return Subject::all();
+        return SubjectResource::collection(Subject::all());
     }
 
     /**

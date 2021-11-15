@@ -15,6 +15,7 @@ class Student extends Model
         'mother_name',
         'address',
         'grade',
+        'gender',
         'started_at',
         'level_id',
         'school_id',

@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
 
-class School extends Model
-{
+class School extends Model {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
@@ -31,15 +30,15 @@ class School extends Model
         });
     }
 
-    public function administrativeUnit () {
+    public function administrativeUnit() {
         return $this->belongsTo(AdministrativeUnit::class);
     }
 
-    public function students () {
+    public function students() {
         return $this->hasMany(Student::class);
     }
 
-    public function teachers () {
+    public function teachers() {
         return $this->hasMany(Teacher::class);
     }
 }

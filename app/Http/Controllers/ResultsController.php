@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Collections\ResultsCollection;
 use App\Http\Requests\CreateResultsRequest;
+use App\Http\Requests\updateResultRequest;
+use App\Http\Resources\ResultResource;
 use App\Models\Result;
 use Illuminate\Http\Request;
 
@@ -11,11 +14,11 @@ class ResultsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return ResultResource::collection(ResultsCollection::collection($request ));
     }
 
     /**
@@ -45,10 +48,11 @@ class ResultsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
-    public function update(CreateResultsRequest $request, $id)
+    public function update(updateResultRequest $request, Result $result)
     {
-        //
+        $result->update($request->validated());
+        return  new ResultResource($result);
     }
 }
