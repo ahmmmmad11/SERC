@@ -21,10 +21,10 @@ class CreateTeachersTable extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('address')->nullable();
             $table->set('grade', ['basic', 'middle', 'secondary']);
-            $table->string('degree');
+            $table->string('degree')->nullable();
             $table->string('specialization')->nullable();
             $table->date('started_at');
-            $table->json('attrs');
+            $table->text('attrs')->nullable();
             $table->foreignId('school_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
