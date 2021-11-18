@@ -5,15 +5,13 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class updateOrCreateTeacherRequest extends FormRequest
-{
+class CreateTeacherRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -22,10 +20,8 @@ class updateOrCreateTeacherRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            'id' => ['nullable', 'exists:teachers,id'],
             'name' => ['required', 'string', 'max:121'],
             'email' => ['required', 'email', 'unique:teachers'],
             'phone' => ['required', 'numeric'],
@@ -35,7 +31,7 @@ class updateOrCreateTeacherRequest extends FormRequest
             'degree' => ['nullable', 'string'],
             'specialization' => ['nullable', 'string', 'max:121'],
             'started_at' => ['required', 'date'],
-            'attrs' => ['nullable', 'array'],
+            'attrs' => ['nullable', 'string'],
             'school_id' => ['required', 'exists:schools,id']
         ];
     }
