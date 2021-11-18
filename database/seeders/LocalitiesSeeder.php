@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Locality;
+use App\Models\State;
 use Illuminate\Database\Seeder;
 
 class LocalitiesSeeder extends Seeder
