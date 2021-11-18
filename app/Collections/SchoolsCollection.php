@@ -8,9 +8,8 @@ use App\Models\School;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class SchoolsCollection
-{
-    public static function collection (Request $request) {
+class SchoolsCollection {
+    public static function collection(Request $request) {
 
         $defaultSort = '-created_at';
 
@@ -54,7 +53,7 @@ class SchoolsCollection
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->defaultSort($defaultSort)
-            ->with('school')
+            ->with('administrativeUnit')
             ->paginate($perPage);
     }
 }

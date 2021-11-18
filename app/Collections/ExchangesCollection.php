@@ -8,9 +8,8 @@ use App\Models\Exchange;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class ExchangesCollection
-{
-    public static function collection (Request $request) {
+class ExchangesCollection {
+    public static function collection(Request $request) {
 
         $defaultSort = '-created_at';
 
@@ -21,7 +20,8 @@ class ExchangesCollection
             'new_school_id',
             'reason',
             'confirmed_at',
-            'scope'
+            'scope',
+            'created_at'
         ];
 
         $allowedFilters = [
@@ -43,15 +43,18 @@ class ExchangesCollection
         ];
 
         $perPage = $request->limit  ? $request->limit : 100;
-
-        return QueryBuilder::for(Exchange::class)
+        $school = auth('school')->user();
+        $query = QueryBuilder::for(Exchange::class)
             ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->defaultSort($defaultSort)
             ->with('student')
             ->with('oldSchool')
-            ->with('newSchool')
-            ->paginate($perPage);
+            ->with('newSchool');
+        if ($school) {
+            $query->where('new_school_id', $school->id);
+        }
+        return $query->paginate($perPage);
     }
 }

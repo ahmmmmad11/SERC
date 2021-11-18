@@ -6,8 +6,7 @@ use App\Models\School;
 use Closure;
 use Illuminate\Http\Request;
 
-class SchoolAPI
-{
+class SchoolAPI {
     /**
      * Handle an incoming request.
      *
@@ -15,11 +14,9 @@ class SchoolAPI
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
-    {
-        $school = School::where('api_key',$request->header('api-key'))->where('api_secret',$request->header('api-secret'))->first();
-        if(!$school){
-            return response()->json(['msg'=>'wrong api key or secret'],403);
+    public function handle(Request $request, Closure $next) {
+        $school = School::where('api_key', $request->header('api-key'))->where('api_secret', $request->header('api-secret'))->first();
+        if ($school) {
         }
         $request->school = $school;
         return $next($request);

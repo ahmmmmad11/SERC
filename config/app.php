@@ -1,5 +1,7 @@
 <?php
 
+
+
 return [
 
     /*
@@ -167,6 +169,7 @@ return [
          */
 
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        App\Helpers\SchoolServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
 
         /*

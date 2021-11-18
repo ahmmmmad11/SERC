@@ -9,14 +9,6 @@ use App\Models\Level;
 use Illuminate\Http\Request;
 
 class LevelsController extends Controller {
-    public function __construct() {
-        // Middleware only applied to these methods
-        $this->middleware('school-api', [
-            'only' => [
-                'index' // Could add bunch of more methods too
-            ]
-        ]);
-    }
 
     /**
      * Display a listing of the resource.
@@ -24,9 +16,7 @@ class LevelsController extends Controller {
      * @return mixed
      */
     public function index(Request $request) {
-        //TODO
-        return Level::with('subjects.subject')->where('grade', $request->school->grade)->get();
-        // return LevelResource::collection(LevelsCollection::collection());
+        return LevelResource::collection(LevelsCollection::collection($request));
     }
 
 

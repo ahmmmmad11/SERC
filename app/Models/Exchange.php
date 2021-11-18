@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Exchange extends Model
-{
+class Exchange extends Model {
     use HasFactory;
 
     protected $fillable = [
@@ -18,15 +17,22 @@ class Exchange extends Model
         'scope'
     ];
 
-    public function student () {
+    protected $casts = [
+
+        'created_at' => 'datetime:Y-m-d',
+        'confirmed_at' => 'datetime:Y-m-d',
+
+    ];
+
+    public function student() {
         return $this->belongsTo(Student::class);
     }
 
-    public function oldSchool () {
+    public function oldSchool() {
         return $this->belongsTo(School::class, 'old_school_id');
     }
 
-    public function newSchool () {
+    public function newSchool() {
         return $this->belongsTo(School::class, 'new_school_id');
     }
 }

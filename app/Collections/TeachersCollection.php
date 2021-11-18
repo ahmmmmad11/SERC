@@ -8,9 +8,8 @@ use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class TeachersCollection
-{
-    public static function collection (Request $request) {
+class TeachersCollection {
+    public static function collection(Request $request) {
 
         $defaultSort = '-created_at';
 
@@ -21,7 +20,7 @@ class TeachersCollection
             'phone',
             'gender',
             'address',
-            'level',
+            'grade',
             'degree',
             'specialization',
             'started_at',
@@ -38,7 +37,7 @@ class TeachersCollection
             'phone',
             'gender',
             'address',
-            'level',
+            'grade',
             'degree',
             'specialization',
             'started_at',
@@ -52,7 +51,7 @@ class TeachersCollection
             'phone',
             'gender',
             'address',
-            'level',
+            'grade',
             'degree',
             'specialization',
             'started_at',

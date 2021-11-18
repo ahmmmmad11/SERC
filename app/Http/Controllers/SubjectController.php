@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Collections\SubjectsCollection;
 use App\Http\Requests\updateOrCreateSubjectRequest;
 use App\Http\Resources\SubjectResource;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 
-class SubjectController extends Controller
-{
+class SubjectController extends Controller {
+
+
     /**
      * Display a listing of the resource.
      *
      * @return mixed
      */
-    public function index()
-    {
-        return SubjectResource::collection(Subject::all());
+    public function index(Request $request) {
+        return SubjectResource::collection(SubjectsCollection::collection($request));
     }
 
     /**
@@ -24,8 +26,7 @@ class SubjectController extends Controller
      * @param  updateOrCreateSubjectRequest  $request
      * @return mixed
      */
-    public function store(updateOrCreateSubjectRequest $request)
-    {
+    public function store(updateOrCreateSubjectRequest $request) {
         return Subject::updateOrCreate(['id' => $request->id], $request->validated());
     }
 
@@ -35,8 +36,7 @@ class SubjectController extends Controller
      * @param Subject $subject
      * @return mixed
      */
-    public function destroy(Subject $subject)
-    {
+    public function destroy(Subject $subject) {
         $subject->delete();
         return response(['message' => __('subject has been deleted')]);
     }

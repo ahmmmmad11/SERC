@@ -8,9 +8,8 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class StudentsCollection
-{
-    public static function collection (Request $request) {
+class StudentsCollection {
+    public static function collection(Request $request) {
 
         $defaultSort = '-created_at';
 
@@ -51,14 +50,22 @@ class StudentsCollection
         ];
 
         $perPage = $request->limit  ? $request->limit : 100;
+        $school = auth('school')->user();
 
-        return QueryBuilder::for(Student::class)
+        $query = QueryBuilder::for(Student::class)
             ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->defaultSort($defaultSort)
             ->with('school')
-            ->with('level')
-            ->paginate($perPage);
+            ->with('level');
+
+        if ($school && !$request->search) {
+            $query->where('school_id', $school->id);
+        }
+        if ($school && $request->search) {
+            $query->where('school_id', '!=', $school->id)->where('grade', $school->grade);
+        }
+        return $query->paginate($perPage);
     }
 }

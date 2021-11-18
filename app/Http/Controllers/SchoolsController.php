@@ -15,7 +15,6 @@ class SchoolsController extends Controller {
      * @return mixed
      */
     public function index(Request $request) {
-        //TODO
         return SchoolRsource::collection(SchoolsCollection::collection($request));
     }
 

@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Teacher extends Model
-{
+class Teacher extends Model {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
@@ -16,7 +15,7 @@ class Teacher extends Model
         'phone',
         'gender',
         'address',
-        'level',
+        'grade',
         'degree',
         'specialization',
         'started_at',
@@ -24,11 +23,11 @@ class Teacher extends Model
         'school_id'
     ];
 
-    public function school ()  {
+    public function school() {
         return $this->belongsTo(School::class);
     }
 
-    public function results () {
+    public function results() {
         return $this->hasMany(Result::class);
     }
 }
