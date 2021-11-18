@@ -29,6 +29,9 @@ class User extends Authenticatable implements JWTSubject {
      */
     protected $fillable = [
         'name',
+        'addressable',
+        'job',
+        'phone',
         'email',
         'password',
     ];
@@ -51,4 +54,8 @@ class User extends Authenticatable implements JWTSubject {
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function addressable () {
+        return $this->morphTo();
+    }
 }
