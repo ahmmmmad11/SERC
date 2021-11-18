@@ -9,16 +9,14 @@ use App\Http\Resources\ResultResource;
 use App\Models\Result;
 use Illuminate\Http\Request;
 
-class ResultsController extends Controller
-{
+class ResultsController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return mixed
      */
-    public function index(Request $request)
-    {
-        return ResultResource::collection(ResultsCollection::collection($request ));
+    public function index(Request $request) {
+        return ResultResource::collection(ResultsCollection::collection($request));
     }
 
     /**
@@ -27,10 +25,11 @@ class ResultsController extends Controller
      * @param  CreateResultsRequest  $request
      * @return mixed
      */
-    public function store(CreateResultsRequest $request)
-    {
+    public function store(CreateResultsRequest $request) {
+        $school = auth('school')->user();
         foreach ($request->results as  $result) {
             Result::create([
+                'school_id'     => $school->id,
                 'teacher_id'    => $request->teacher_id,
                 'subject_id'    => $request->subject_id,
                 'level_id'      => $request->level_id,
@@ -50,8 +49,7 @@ class ResultsController extends Controller
      * @param  int  $id
      * @return mixed
      */
-    public function update(updateResultRequest $request, Result $result)
-    {
+    public function update(updateResultRequest $request, Result $result) {
         $result->update($request->validated());
         return  new ResultResource($result);
     }
