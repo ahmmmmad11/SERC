@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Collections\SchoolsCollection;
-use App\Http\Requests\updateOrCreateSchoolRequest;
+use App\Http\Requests\CreateSchoolRequest;
+use App\Http\Requests\UpdateSchoolRequest;
 use App\Http\Resources\SchoolRsource;
 use App\Models\School;
 use Illuminate\Http\Request;
@@ -22,12 +23,17 @@ class SchoolsController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  updateOrCreateSchoolRequest  $request
+     * @param  CreateSchoolRequest  $request
      * @return SchoolRsource
      * @noinspection PhpUndefinedMethodInspection
      */
-    public function store(updateOrCreateSchoolRequest $request) {
+    public function store(CreateSchoolRequest $request) {
         $school = School::updateOrCreate(['id' => $request->id], $request->validated());
+        return new SchoolRsource($school);
+    }
+
+    public function update(UpdateSchoolRequest $request, School $school) {
+        $school->update($request->validated());
         return new SchoolRsource($school);
     }
 

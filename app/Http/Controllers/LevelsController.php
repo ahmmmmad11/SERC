@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Collections\LevelsCollection;
-use App\Http\Requests\UpdateOrCreateLevelRequest;
+use App\Http\Requests\CreateLevelRequest;
+use App\Http\Requests\UpdateLevelRequest;
 use App\Http\Resources\LevelResource;
 use App\Models\Level;
 use Illuminate\Http\Request;
@@ -23,11 +24,16 @@ class LevelsController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UpdateOrCreateLevelRequest  $request
+     * @param  CreateLevelRequest  $request
      * @return mixed
      */
-    public function store(UpdateOrCreateLevelRequest $request) {
+    public function store(CreateLevelRequest $request) {
         return Level::updateOrCreate(['id' => $request->id], $request->validated());
+    }
+
+    public function update(UpdateLevelRequest $request, Level $level) {
+        $level->update($request->validated());
+        return new LevelResource($level);
     }
 
     /**

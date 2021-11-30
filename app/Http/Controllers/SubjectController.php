@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Collections\SubjectsCollection;
-use App\Http\Requests\updateOrCreateSubjectRequest;
+use App\Http\Requests\CreateSubjectRequest;
+use App\Http\Requests\UpdateSubjectRequest;
 use App\Http\Resources\SubjectResource;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -23,11 +24,16 @@ class SubjectController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param  updateOrCreateSubjectRequest  $request
+     * @param  CreateSubjectRequest  $request
      * @return mixed
      */
-    public function store(updateOrCreateSubjectRequest $request) {
+    public function store(CreateSubjectRequest $request) {
         return Subject::updateOrCreate(['id' => $request->id], $request->validated());
+    }
+
+    public function update(UpdateSubjectRequest $request, Subject $subject) {
+        $subject->update($request->validated());
+        return new SubjectResource($subject);
     }
 
     /**

@@ -6,15 +6,13 @@ use App\Models\LevelSubject;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class CreateResultsRequest extends FormRequest
-{
+class CreateResultsRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -23,10 +21,10 @@ class CreateResultsRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
-        $max_mark = LevelSubject::where('subject_id', $this->request->subject_id)
-            ->where('level_id', $this->request->level_id)
+    public function rules() {
+        $request = request();
+        $max_mark = LevelSubject::where('subject_id', $request->subject_id)
+            ->where('level_id', $request->level_id)
             ->first()
             ->full_degree;
 
@@ -37,7 +35,7 @@ class CreateResultsRequest extends FormRequest
             'academic_year' => ['required'],
             'term' => ['required', Rule::in(['first', 'last'])],
             'results' => ['required', 'array'],
-            'results.*.mark' => ['required', 'numeric', 'min:0', 'max:'.$max_mark],
+            'results.*.mark' => ['required', 'numeric', 'min:0', 'max:' . $max_mark],
             'results.*.student_id' => ['required', 'exists:students,id'],
         ];
     }

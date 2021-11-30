@@ -5,15 +5,13 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class updateOrCreateSchoolRequest extends FormRequest
-{
+class CreateSchoolRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -22,10 +20,8 @@ class updateOrCreateSchoolRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            'id'                        => ['nullable', 'exists:schools,id'],
             'administrative_unit_id'    => ['required', 'exists:administrative_units,id'],
             'name'                      => ['required', 'string'],
             'type'                      => ['required', Rule::in(['public', 'private'])],
