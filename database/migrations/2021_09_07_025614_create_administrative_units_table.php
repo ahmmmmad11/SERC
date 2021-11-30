@@ -15,7 +15,7 @@ class CreateAdministrativeUnitsTable extends Migration
     {
         Schema::create('administrative_units', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('local_id');
+            $table->foreignId('locality_id');
             $table->string('name');
             $table->softDeletes();
             $table->timestamps();

@@ -32,7 +32,7 @@ class CreateTeacherRequest extends FormRequest {
             'specialization' => ['nullable', 'string', 'max:121'],
             'started_at' => ['required', 'date'],
             'attrs' => ['nullable', 'string'],
-            'school_id' => ['required', 'exists:schools,id']
+            'school_id' => ['nullable', 'exists:schools,id']
         ];
     }
 }
